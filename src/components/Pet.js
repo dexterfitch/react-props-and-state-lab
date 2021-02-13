@@ -5,21 +5,23 @@ class Pet extends React.Component {
     return (
       <div className="card">
         <div className="content">
-          <a className="header">
+          <a href="#here" className="header">
             {/*'♀' OR '♂' */}
-            PET NAME
+            <span>{this.props.pet.name}</span> <span style={{ fontSize: 27, lineHeight: 1, position: "relative", top: 3 }}>{(this.props.pet.gender === "female") ? "♀" : "♂"}</span>
           </a>
           <div className="meta">
-            <span className="date">PET TYPE</span>
+            <span className="type" style={{ textTransform: "capitalize" }}>{this.props.pet.type}</span>
           </div>
           <div className="description">
-            <p>Age: PET AGE</p>
-            <p>Weight: PET WEIGHT</p>
+            <p>Age: {this.props.pet.age} yrs</p>
+            <p>Weight: {this.props.pet.weight} lbs</p>
           </div>
         </div>
         <div className="extra content">
-          <button className="ui disabled button">Already adopted</button>
-          <button className="ui primary button">Adopt pet</button>
+        {this.props.pet.isAdopted ? 
+          (<button className="ui disabled button">Already adopted</button>) :
+          (<button className="ui primary button" onClick={() => this.props.onAdoptPet(this.props.pet.id)}>Adopt pet</button>)
+        }
         </div>
       </div>
     )
